@@ -217,8 +217,14 @@ as strings.
 
 ```yaml
 cap_add:
-  - ALL
+  - NET_BIND_SERVICE
 ```
+
+By default, the docker runtime drops all but a selected subset of capabilities when running a container as root.
+`cap_add` can be used to add additional capabilities to this set of retained capabilities.
+
+`cap_add` is only supported when running the container as root user. It is not possible to add ambient
+capabilities to non-privileged container with the `cap_add` directive.
 
 ### `cap_drop`
 
@@ -227,8 +233,7 @@ as strings.
 
 ```yaml
 cap_drop:
-  - NET_ADMIN
-  - SYS_ADMIN
+  - ALL
 ```
 
 ### `cgroup`
